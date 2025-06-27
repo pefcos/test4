@@ -21,6 +21,16 @@ Firstly, I've normalized code layout to use a `try catch` block, just like the i
 
 I chose the file watcher approach, so this way, we only recalculate stats when the relevant files have actually changed. This code quickly became too complex for the route file, so I've decided to implement a Service pattern by creating a Singleton in `services/statsService.js`. This class is responsible for watching the files (in a non blocking way), and storing the latest stats calculation result. This service class, in turn, uses the provided but previously unreferenced `utils/stats.js` function `mean`, to encapsulate the mean calculation.
 
+### Task 3: Testing
+
+I've added Jest test to all routes, including happy paths and error cases, using mocking to mimic the behavior of other classes and utilities.
+
+## Frontend
+
+### Task 1: Memory Leak
+
+The memory leak was caused by the component unmounting before the fetch completed, triggering an update to an already unmounted component. To avoid this, I used a `AbortController` to abort a request if the component is no longer mounted.
+
 ## Other Problems
 
 ### Fetch call on Item List
