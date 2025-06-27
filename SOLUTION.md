@@ -19,7 +19,7 @@ By changing the import to `const fs = require('fs').promises;`, the operations c
 
 Firstly, I've normalized code layout to use a `try catch` block, just like the items routes. After that, I've added async file I/O to this file as well.
 
-I chose the file watcher approach, so this way, we only recalculate stats when the relevant files have actually changed. This code quickly became too complex for the route file, so I've decided to implement a Service pattern by creating a Singleton in `services/statsService.js`. This class is responsible for watching the files (in a non blocking way), and storing the latest stats calculation result. This service class, in turn, uses the provided but previously unreferenced `utils/stats.js` function `mean`, to encapsulate the mean calculation.
+I chose the file watcher approach, so this way, we only recalculate stats when the relevant files have actually changed. This code quickly became too complex for the route file, so I've decided to implement a Service pattern by creating a module in `services/statsService.js`. This module is responsible for watching the files (in a non blocking way), and storing the latest stats calculation result. This service then uses the provided but previously unreferenced `utils/stats.js` function `mean`, to encapsulate the mean calculation.
 
 ### Task 3: Testing
 
