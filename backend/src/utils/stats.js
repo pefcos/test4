@@ -1,6 +1,5 @@
-// Utility intentionally unused by routes (candidate should refactor)
-function mean(arr) {
-  return arr.reduce((a, b) => a + b, 0) / arr.length;
+function mean(items) {
+  return items.reduce((acc, cur) => acc + cur.price, 0) / items.length;
 }
 
 module.exports = { mean };

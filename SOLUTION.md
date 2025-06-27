@@ -15,6 +15,12 @@ Solving this was relatively simple, as the `fs` module already provides async I/
 
 By changing the import to `const fs = require('fs').promises;`, the operations could be rewritten with the use of `fs.readFile()` and `fs.writeFile()`, combined with `await`. This requires that we make the functions `async`, so the route definitions (and the `readData` function) had to be changed to contain `async` in their definiton.
 
+### Task 2: Performance
+
+Firstly, I've normalized code layout to use a `try catch` block, just like the items routes. After that, I've added async file I/O to this file as well.
+
+I chose the file watcher approach, so this way, we only recalculate stats when the relevant files have actually changed. This code quickly became too complex for the route file, so I've decided to implement a Service pattern by creating a Singleton in `services/statsService.js`. This class is responsible for watching the files (in a non blocking way), and storing the latest stats calculation result. This service class, in turn, uses the provided but previously unreferenced `utils/stats.js` function `mean`, to encapsulate the mean calculation.
+
 ## Other Problems
 
 ### Fetch call on Item List
