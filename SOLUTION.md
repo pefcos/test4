@@ -15,3 +15,8 @@ Solving this was relatively simple, as the `fs` module already provides async I/
 
 By changing the import to `const fs = require('fs').promises;`, the operations could be rewritten with the use of `fs.readFile()` and `fs.writeFile()`, combined with `await`. This requires that we make the functions `async`, so the route definitions (and the `readData` function) had to be changed to contain `async` in their definiton.
 
+## Other Problems
+
+### Fetch call on Item List
+
+The call to `fetch` in the `ItemDetail` component was fetching from the frontend URL. I've changed the fetch call to include the full URL for the backend, just like implemented in the `DataProvider`.
