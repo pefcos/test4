@@ -3,20 +3,19 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Items from './Items';
 import ItemDetail from './ItemDetail';
 import Navbar from './Navbar';
-import { DataProvider } from '../state/DataContext';
+import NewItem from './NewItem';
 
 function App() {
   return (
     <div>
       <Navbar/>
-      <DataProvider>
-        <div className="container mt-4">
-          <Routes>
-            <Route path="/" element={<Items />} />
-            <Route path="/items/:id" element={<ItemDetail />} />
-          </Routes>
-        </div>
-      </DataProvider>
+      <div className="container mt-4">
+        <Routes>
+          <Route path="/" element={<Items />} />
+          <Route path="/items/:id" element={<ItemDetail />} />
+          <Route path="/items/new" element={<NewItem />} />
+        </Routes>
+      </div>
     </div>
   );
 }

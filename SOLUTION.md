@@ -68,3 +68,10 @@ The call to `fetch` in the `ItemDetail` component was fetching from the frontend
 ### Item listing
 
 To adequately showcase the `react-window` working as well as justifying the use of pagination, I've expanded the dataset using (Mockaroo)[https://www.mockaroo.com/] to generate 1000 mock items in the desired format.
+
+### Unused endpoints
+
+Some of the backend endpoints weren't being used by the frontend, so I decided to give them an application. The unused endpoints that were given a role are:
+
+1. `GET /api/stats` - The `pages/items/ItemsStats` component fetches from the stats api to display the stats on item listing.
+2. `POST /api/items` - The `pages/NewItem` component adds a form for the user to register new items in the application.

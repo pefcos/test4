@@ -18,7 +18,7 @@ function ItemsStats() {
   }, [fetchStats]);
 
   // Loading Spinner
-  if (!stats.total) return <LoadingSpinner center={false}/>;
+  if (stats.total === undefined) return <LoadingSpinner center={false}/>;
 
   return (
     <div>

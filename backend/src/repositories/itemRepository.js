@@ -2,6 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { validateItem } = require('../validators/itemValidator');
 const DATA_PATH = path.join(__dirname, '../../../data/items.json');
+const statsService = require('../services/statsService');
 
 const DEFAULT_LIMIT = 200;
 const DEFAULT_PAGE = 1;
@@ -49,6 +50,7 @@ async function insertItem(item) {
 
   data.push(item);
   await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2));
+  await statsService.recalculate(); // Stats have changed!
 }
 
 // Private
@@ -63,5 +65,6 @@ async function readData() {
 module.exports = {
   getItems,
   getItemById,
-  insertItem
+  insertItem,
+  DEFAULT_LIMIT
 };

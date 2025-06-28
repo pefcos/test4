@@ -9,4 +9,13 @@ async function fetchItemsFromAPI({ signal, query, limit, page }) {
   return response.data;
 }
 
-export { fetchItemsFromAPI };
+async function postItemToAPI(itemData) {
+  try {
+    const response = await axios.post(BASE_URL, itemData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export { fetchItemsFromAPI, postItemToAPI };

@@ -1,12 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ItemsList from './items/ItemsList';
 import ItemsStats from './items/ItemsStats';
 import ItemsSearch from './items/ItemsSearch';
 import ItemsPagination from './items/ItemsPagination';
+import { DataProvider } from '../state/DataContext';
 
 function Items() {
+  const navigate = useNavigate();
+
   return (
-    <div>
+    <DataProvider>
       <div className="d-flex justify-content-between mb-3">
         <div>
           <h3>Your Items</h3>
@@ -18,8 +22,15 @@ function Items() {
       <hr/>
 
       <ItemsList/>
-      <ItemsPagination/>
-    </div>
+      <div className="row">
+        <div className="col-md-6 col-12">
+          <button className="btn btn-outline-success" onClick={() => navigate("/items/new")}> Add Item </button>
+        </div>
+        <div className="col-md-6 col-12">
+          <ItemsPagination/>
+        </div>
+      </div>
+    </DataProvider>
   );
 }
 
