@@ -6,6 +6,7 @@ const statsRouter = require('./routes/stats');
 const cors = require('cors');
 const { getCookie, notFound } = require('./middleware/errorHandler');
 const logger = require('./middleware/logger');
+const { initStatsService } = require('./services/statsService');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -19,6 +20,9 @@ app.use(logger);
 // Routes
 app.use('/api/items', itemsRouter);
 app.use('/api/stats', statsRouter);
+
+// File Watcher initialization
+initStatsService();
 
 // Not Found
 app.use('*', notFound);

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { mean } = require('../utils/stats');
+const chokidar = require('chokidar');
 
 const DATA_PATH = path.join(__dirname, '../../../data/items.json');
 
@@ -25,6 +26,7 @@ function getStats() {
 }
 
 async function initStatsService(dataPath = DATA_PATH) {
+  process.stdout.write(`Initializing statsService...\n`);
   await recalculate(dataPath);
   setupWatcher(dataPath);
 }
@@ -32,11 +34,15 @@ async function initStatsService(dataPath = DATA_PATH) {
 // Private
 
 function setupWatcher(dataPath = DATA_PATH) {
-  fs.watch(dataPath, (eventType) => {
-    if (eventType === 'change') {
-      recalculate(dataPath);
-    }
+  const watcher = chokidar.watch(dataPath, { persistent: true, usePolling: true, interval: 1000 });
+  watcher.on('change', (changedPath) => {
+    process.stdout.write(`${changedPath} has been modified.\n`);
+    recalculate(dataPath);
   });
+  watcher.on('error', (error) => {
+    console.error('Watcher error:', error);
+  });
+  process.stdout.write(`File ${dataPath} being watched!\n`);
 }
 
 // Exports
