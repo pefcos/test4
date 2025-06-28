@@ -45,6 +45,8 @@ The Navbar was divided into its own component in order to make the code of `App.
 
 For the `/` route, which displays the items, I've noticed that the API provided both `category`, `price` and `id` information, so I thought it was a good idea to display those to our user as well, so the user can quickly identify the category and prices of the items. I've also opted to only display the id in the `itemDetails` view, since those need to have a reason to be clicked as well, and the ID wouldn't look as good in the item list.
 
+Since the `stats` endpoint of the API was not being used, I've implemented a small stats component in the item listing. Also, the `Items.js` component quickly became too big, so I've split it into two smaller components, one for the item list and another for the stats. Each of them will fetch their data separately.
+
 ## Other Improvements
 
 ### Fetch call on Item List

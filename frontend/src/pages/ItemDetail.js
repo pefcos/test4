@@ -24,7 +24,7 @@ function ItemDetail() {
       <p><strong>ID:</strong> {item.id}</p>
       <p><strong>Category:</strong> {item.category}</p>
       <p><strong>Price:</strong> ${item.price}</p>
-      <button className="btn btn-outline-secondary" onClick={() => navigate("/")}>Go back</button>
+      <button className="btn btn-outline-secondary" onClick={() => navigate(-1)}>Go back</button>
     </div>
   );
 }

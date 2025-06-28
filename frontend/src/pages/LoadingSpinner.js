@@ -1,8 +1,8 @@
 import React from 'react';
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({ center = true }) => {
   return (
-    <div className="text-center">
+    <div className={center ? 'text-center' : ''}>
       <div className="spinner-border" role="status">
         <span className="visually-hidden">Loading...</span>
       </div>
