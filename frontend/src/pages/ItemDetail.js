@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import LoadingSpinner from './LoadingSpinner';
 
 function ItemDetail() {
   const { id } = useParams();
@@ -13,13 +14,17 @@ function ItemDetail() {
       .catch(() => navigate('/'));
   }, [id, navigate]);
 
-  if (!item) return <p>Loading...</p>;
+  // Loading spinnner
+  if (!item) return <LoadingSpinner/>;
 
   return (
-    <div style={{padding: 16}}>
+    <div>
       <h2>{item.name}</h2>
+      <hr></hr>
+      <p><strong>ID:</strong> {item.id}</p>
       <p><strong>Category:</strong> {item.category}</p>
       <p><strong>Price:</strong> ${item.price}</p>
+      <button className="btn btn-outline-secondary" onClick={() => navigate("/")}>Go back</button>
     </div>
   );
 }

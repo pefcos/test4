@@ -31,6 +31,20 @@ I've added Jest test to all routes, including happy paths and error cases, using
 
 The memory leak was caused by the component unmounting before the fetch completed, triggering an update to an already unmounted component. To avoid this, I used a `AbortController` to abort a request if the component is no longer mounted.
 
+### Task 2: Pagination and Searching
+
+This task triggered a lot of refactors around my backend, as it introduced complex logic for filtering and querying. My `routes/items.js` file was no longer clean and idiomatic, this also broke the principle of single responsability. To address this I've moved data querying logic to a Repository class.
+
+Validation was also implemented in a separate validator module, again, following SOLID principles.
+
+### Task 4: UI/UX
+
+I've installed bootstrap in the frontend project, because it is a library I'm used to working with and it provides several mechanisms that are responsive by nature, while not being as complex and verbose as something like Tailwind. After that, I've restructured the application.
+
+The Navbar was divided into its own component in order to make the code of `App.js` more concise, and the `LoadingSpinner.js` component was created, so it can be used by all the other components that might need to fetch data (now or in the future), if we decide to implement more components or other views. Apart from that, the bootstrap classes were applied to style the pages in the application.
+
+For the `/` route, which displays the items, I've noticed that the API provided both `category`, `price` and `id` information, so I thought it was a good idea to display those to our user as well, so the user can quickly identify the category and prices of the items. I've also opted to only display the id in the `itemDetails` view, since those need to have a reason to be clicked as well, and the ID wouldn't look as good in the item list.
+
 ## Other Problems
 
 ### Fetch call on Item List
