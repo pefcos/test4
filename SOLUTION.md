@@ -45,8 +45,12 @@ The Navbar was divided into its own component in order to make the code of `App.
 
 For the `/` route, which displays the items, I've noticed that the API provided both `category`, `price` and `id` information, so I thought it was a good idea to display those to our user as well, so the user can quickly identify the category and prices of the items. I've also opted to only display the id in the `itemDetails` view, since those need to have a reason to be clicked as well, and the ID wouldn't look as good in the item list.
 
-## Other Problems
+## Other Improvements
 
 ### Fetch call on Item List
 
 The call to `fetch` in the `ItemDetail` component was fetching from the frontend URL. I've changed the fetch call to include the full URL for the backend, just like implemented in the `DataProvider`.
+
+### Item listing
+
+To adequately showcase the `react-window` working as well as justifying the use of pagination, I've expanded the dataset using (Mockaroo)[https://www.mockaroo.com/] to generate 1000 mock items in the desired format.
