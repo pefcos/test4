@@ -1,6 +1,7 @@
 import React from 'react';
 import ItemsTable from './items/ItemsTable';
 import ItemsStats from './items/ItemsStats';
+import ItemsSearch from './items/ItemsSearch';
 
 function Items() {
   return (
@@ -9,10 +10,7 @@ function Items() {
         <div>
           <h3>Your Items</h3>
         </div>
-        <form className="d-flex" role="search">
-          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-          <button className="btn btn-outline-primary" type="submit">Search</button>
-        </form>
+        <ItemsSearch/>
       </div>
 
       <ItemsStats/>

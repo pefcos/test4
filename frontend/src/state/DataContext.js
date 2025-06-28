@@ -6,8 +6,9 @@ export function DataProvider({ children }) {
   const [items, setItems] = useState([]);
   const [stats, setStats] = useState({});
 
-  const fetchItems = useCallback(async ({ signal }) => {
-    const res = await fetch('http://localhost:3001/api/items?limit=500', { signal });
+  // TODO: Refactor fetches into their own files.
+  const fetchItems = useCallback(async ({ signal, query = '' }) => {
+    const res = await fetch(`http://localhost:3001/api/items?limit=500&q=${encodeURIComponent(query)}`, { signal });
     const json = await res.json();
     setItems(json);
   }, []);

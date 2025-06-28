@@ -35,7 +35,7 @@ The memory leak was caused by the component unmounting before the fetch complete
 
 This task triggered a lot of refactors around my backend, as it introduced complex logic for filtering and querying. My `routes/items.js` file was no longer clean and idiomatic, this also broke the principle of single responsability. To address this I've moved data querying logic to a Repository class.
 
-Validation was also implemented in a separate validator module, again, following SOLID principles.
+Validation was also implemented in a separate validator module, again, following SOLID principles. For searching, the basic and simple approach is to have a search field, where the user can first type a prompt and manually submit after they're done. This approach looks less interactive from a UI standpoint, but it is lighter on backend API usage. The React context makes this very easy to split into a separate component as well, since we don't need to worry about the data flow between components, which would make the code cluttered and hard to understand.
 
 ### Task 4: UI/UX
 
@@ -45,7 +45,7 @@ The Navbar was divided into its own component in order to make the code of `App.
 
 For the `/` route, which displays the items, I've noticed that the API provided both `category`, `price` and `id` information, so I thought it was a good idea to display those to our user as well, so the user can quickly identify the category and prices of the items. I've also opted to only display the id in the `itemDetails` view, since those need to have a reason to be clicked as well, and the ID wouldn't look as good in the item list.
 
-Since the `stats` endpoint of the API was not being used, I've implemented a small stats component in the item listing. Also, the `Items.js` component quickly became too big, so I've split it into two smaller components, one for the item list and another for the stats. Each of them will fetch their data separately.
+Since the `stats` endpoint of the API was not being used, I've implemented a small stats component in the item listing. Also, the `Items.js` component quickly became too big, so I've split it into three smaller components, one for the item list, another for the stats, and yet another one for the searching feature. Each of them will take care of their own behavior, without concerning about the features of the surrounding components.
 
 ## Other Improvements
 
