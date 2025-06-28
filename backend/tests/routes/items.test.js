@@ -2,7 +2,7 @@ const request = require('supertest');
 const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');
-const router = require('../../routes/items');
+const router = require('../../src/routes/items');
 
 jest.mock('fs', () => ({
   promises: {

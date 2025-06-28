@@ -1,4 +1,4 @@
-const { mean } = require('../../utils/stats');
+const { mean } = require('../../src/utils/stats');
 
 describe('mean', () => {
   it('calculates correctly for many items', () => {

@@ -1,13 +1,13 @@
 const express = require('express');
 const request = require('supertest');
 
-jest.mock('../../services/statsService', () => ({
+jest.mock('../../src/services/statsService', () => ({
   getStats: jest.fn(),
   recalculate: jest.fn()
 }));
 
-const statsService = require('../../services/statsService');
-const statsRouter = require('../../routes/stats');
+const statsService = require('../../src/services/statsService');
+const statsRouter = require('../../src/routes/stats');
 
 describe('GET /stats', () => {
   let app;
