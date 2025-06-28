@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemsTable from './items/ItemsTable';
+import ItemsList from './items/ItemsList';
 import ItemsStats from './items/ItemsStats';
 import ItemsSearch from './items/ItemsSearch';
 import ItemsPagination from './items/ItemsPagination';
@@ -17,8 +17,7 @@ function Items() {
 
       <hr/>
 
-      <ItemsPagination/>
-      <ItemsTable/>
+      <ItemsList/>
       <ItemsPagination/>
     </div>
   );

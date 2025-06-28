@@ -45,6 +45,10 @@ As consequence, the stats service (even though it has no complicated parameter b
 
 Pagination was made through a component and the state of pagination was kept in the `DataProvider` context. I've opted to make page count fixed, but the repository came with 500 items per page as a default, so in order to showcase the component working, I've reduced it to 200 (since I have 1000 rows of mock data). The Pagination component could be made generic and put under a shared `components` or `utils` directory, but for simplicity, I've decided to implement a `Items` specific pagination component, as there are currently no other places to use pagination in. In order to be able to paginate smoothly and stop the user from paginating further than the last page with results, I've changed the API to provide an object instead of an array, containing the total number of elements matching the query filter. This way, the pagination component can prevent the user from visiting pages without any content.
 
+### Task 3: Performance
+
+I've decided to use `react-window` to solve this problem. Since react-window doesn't integrate well with tables, I've refactored the components into a list, which can be made scrollable and integrates well with virtualization.
+
 ### Task 4: UI/UX
 
 I've installed bootstrap in the frontend project, because it is a library I'm used to working with and it provides several mechanisms that are responsive by nature, while not being as complex and verbose as something like Tailwind. After that, I've restructured the application.

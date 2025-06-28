@@ -8,7 +8,7 @@ const ItemsPagination = () => {
   if (lastPage <= 1) return null;
 
   return (
-    <nav>
+    <nav className="float-end">
       <ul className="pagination">
         <li className={`page-item ${page === 1 ? 'disabled' : ''}`}>
           <button className="page-link" onClick={() => goToPage(1)} disabled={page === 1}>
