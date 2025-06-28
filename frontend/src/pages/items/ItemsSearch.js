@@ -1,14 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useData } from '../../state/DataContext';
 
 function ItemsSearch() {
-  const { fetchItems } = useData();
-  const [query, setQuery] = useState('');
+  const { searchItems } = useData();
+  const [localQuery, setLocalQuery] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const controller = new AbortController();
-    fetchItems({ signal: controller.signal, query });
+    await searchItems(localQuery, controller.signal);
   };
 
   return (
@@ -18,8 +18,8 @@ function ItemsSearch() {
         type="search"
         placeholder="Search"
         aria-label="Search"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        value={localQuery}
+        onChange={(e) => setLocalQuery(e.target.value)}
       />
       <button className="btn btn-outline-primary" type="submit">
         Search

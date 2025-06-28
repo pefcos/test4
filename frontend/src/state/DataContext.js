@@ -1,26 +1,45 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
+import { fetchItemsFromAPI } from '../services/items';
+import { fetchStatsFromAPI } from '../services/stats';
 
 const DataContext = createContext();
+const LIMIT_PER_PAGE = 100;
 
 export function DataProvider({ children }) {
   const [items, setItems] = useState([]);
   const [stats, setStats] = useState({});
 
-  // TODO: Refactor fetches into their own files.
-  const fetchItems = useCallback(async ({ signal, query = '' }) => {
-    const res = await fetch(`http://localhost:3001/api/items?limit=500&q=${encodeURIComponent(query)}`, { signal });
-    const json = await res.json();
-    setItems(json);
+  // Params to fetch items
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState('');
+
+  const fetchItems = useCallback(async ({ signal }) => {
+    const data = await fetchItemsFromAPI({ signal, query, LIMIT_PER_PAGE, page });
+    setItems(data);
   }, []);
 
   const fetchStats = useCallback(async ({ signal }) => {
-    const res = await fetch('http://localhost:3001/api/stats', { signal });
-    const json = await res.json();
-    setStats(json);
+    const data = await fetchStatsFromAPI(signal);
+    setStats(data);
+  }, []);
+
+  const searchItems = useCallback(async (queryInput, signal) => {
+    setQuery(queryInput);
+    setPage(1);
+    const data = await fetchItemsFromAPI({ signal, query: queryInput, LIMIT_PER_PAGE, page: 1 });
+    setItems(data);
   }, []);
 
   return (
-    <DataContext.Provider value={{ items, fetchItems, stats, fetchStats }}>
+    <DataContext.Provider value={{
+      items,
+      fetchItems,
+      stats,
+      fetchStats,
+      page,
+      query,
+      searchItems,
+    }}>
       {children}
     </DataContext.Provider>
   );
