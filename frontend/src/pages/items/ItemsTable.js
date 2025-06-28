@@ -20,7 +20,10 @@ function ItemsTable() {
   }, [fetchItems]);
 
   // Loading Spinner
-  if (!items.length) return <LoadingSpinner/>;
+  if (items === undefined) return <LoadingSpinner/>;
+
+  // Empty list
+  if (!items.length) return <h5 className="text-muted mb-4">No items found.</h5>;
 
   return (
     <table className="table table-hover">

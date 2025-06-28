@@ -43,6 +43,7 @@ At this point, I had to make a decision regarding the way we fetch items from th
 
 As consequence, the stats service (even though it has no complicated parameter building), has also been ported to use `axios`. This was made to ensure code consistency.
 
+Pagination was made through a component and the state of pagination was kept in the `DataProvider` context. I've opted to make page count fixed, but the repository came with 500 items per page as a default, so in order to showcase the component working, I've reduced it to 200 (since I have 1000 rows of mock data). The Pagination component could be made generic and put under a shared `components` or `utils` directory, but for simplicity, I've decided to implement a `Items` specific pagination component, as there are currently no other places to use pagination in. In order to be able to paginate smoothly and stop the user from paginating further than the last page with results, I've changed the API to provide an object instead of an array, containing the total number of elements matching the query filter. This way, the pagination component can prevent the user from visiting pages without any content.
 
 ### Task 4: UI/UX
 
@@ -52,7 +53,7 @@ The Navbar was divided into its own component in order to make the code of `App.
 
 For the `/` route, which displays the items, I've noticed that the API provided both `category`, `price` and `id` information, so I thought it was a good idea to display those to our user as well, so the user can quickly identify the category and prices of the items. I've also opted to only display the id in the `itemDetails` view, since those need to have a reason to be clicked as well, and the ID wouldn't look as good in the item list.
 
-Since the `stats` endpoint of the API was not being used, I've implemented a small stats component in the item listing. Also, the `Items.js` component quickly became too big, so I've split it into three smaller components, one for the item list, another for the stats, and yet another one for the searching feature. Each of them will take care of their own behavior, without concerning about the features of the surrounding components.
+Since the `stats` endpoint of the API was not being used, I've implemented a small stats component in the item listing. Also, the `Items.js` component quickly became too big, so I've split it into three smaller components, one for the item list, another for the stats, and yet another one for the searching feature. Each of them will take care of their own behavior, without concerning about the features of the surrounding components. Within the context component, I've avoided exposing state mutations directly, instead opting for `useCallback`, as it encapsulates state change logic.
 
 ## Other Improvements
 

@@ -2,6 +2,7 @@ import React from 'react';
 import ItemsTable from './items/ItemsTable';
 import ItemsStats from './items/ItemsStats';
 import ItemsSearch from './items/ItemsSearch';
+import ItemsPagination from './items/ItemsPagination';
 
 function Items() {
   return (
@@ -12,12 +13,13 @@ function Items() {
         </div>
         <ItemsSearch/>
       </div>
-
       <ItemsStats/>
 
       <hr/>
-  
+
+      <ItemsPagination/>
       <ItemsTable/>
+      <ItemsPagination/>
     </div>
   );
 }

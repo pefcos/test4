@@ -3,7 +3,7 @@ const path = require('path');
 const { validateItem } = require('../validators/itemValidator');
 const DATA_PATH = path.join(__dirname, '../../../data/items.json');
 
-const DEFAULT_LIMIT = 10;
+const DEFAULT_LIMIT = 200;
 const DEFAULT_PAGE = 1;
 
 async function getItems({ q, limit = DEFAULT_LIMIT, page = DEFAULT_PAGE } = {}) {
@@ -15,6 +15,8 @@ async function getItems({ q, limit = DEFAULT_LIMIT, page = DEFAULT_PAGE } = {}) 
     results = results.filter(item => item.name.toLowerCase().includes(q.toLowerCase()));
   }
 
+  const totalCount = results.length;
+
   // Pagination
   const pageSize = parseInt(limit, 10) > 0 ? parseInt(limit, 10) : DEFAULT_LIMIT;
   const pageNumber = parseInt(page, 10) > 0 ? parseInt(page, 10) : DEFAULT_PAGE;
@@ -22,7 +24,10 @@ async function getItems({ q, limit = DEFAULT_LIMIT, page = DEFAULT_PAGE } = {}) 
   const startIndex = (pageNumber - 1) * pageSize;
   const paginatedResults = results.slice(startIndex, startIndex + pageSize);
 
-  return paginatedResults;
+  return {
+    items: paginatedResults,
+    totalCount: totalCount
+  };
 }
 
 async function getItemById(id) {

@@ -37,6 +37,12 @@ describe('GET /api/items', () => {
     expect(res.body).toHaveLength(mockData.length);
   });
 
+  it('should return all items without a query', async () => {
+    const res = await request(app).get('/api/items?q=&page=1');
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveLength(mockData.length);
+  });
+
   it('should filter items by query string', async () => {
     const res = await request(app).get('/api/items?q=special');
     expect(res.statusCode).toBe(200);
