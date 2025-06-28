@@ -34,27 +34,31 @@ describe('GET /api/items', () => {
   it('should return all items', async () => {
     const res = await request(app).get('/api/items');
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveLength(mockData.length);
+    expect(res.body.items).toHaveLength(mockData.length);
+    expect(res.body.totalCount).toBe(3);
   });
 
   it('should return all items without a query', async () => {
     const res = await request(app).get('/api/items?q=&page=1');
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveLength(mockData.length);
+    expect(res.body.items).toHaveLength(mockData.length);
+    expect(res.body.totalCount).toBe(3);
   });
 
   it('should filter items by query string', async () => {
     const res = await request(app).get('/api/items?q=special');
     expect(res.statusCode).toBe(200);
-    expect(res.body).toEqual([
+    expect(res.body.items).toEqual([
       expect.objectContaining({ name: 'Special Item' })
     ]);
+    expect(res.body.totalCount).toBe(1);
   });
 
   it('should apply limit to results', async () => {
     const res = await request(app).get('/api/items?limit=2');
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveLength(2);
+    expect(res.body.items).toHaveLength(2);
+    expect(res.body.totalCount).toBe(3);
   });
 });
 
