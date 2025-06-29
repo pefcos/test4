@@ -12,6 +12,10 @@ function NewItem() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!name.trim() || !category.trim() || isNaN(parseFloat(price))) {
+      return;
+    }
+
     const newItem = {
       name,
       category,
