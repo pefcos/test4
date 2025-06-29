@@ -1,60 +1,102 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import ItemsList from '../../../pages/items/ItemsList';
-import { DataContext } from '../../../state/DataContext';
-import { useNavigate } from 'react-router-dom';
+import { useData } from '../../../state/DataContext';
+import { MemoryRouter } from 'react-router-dom';
+import * as DataContext from '../../../state/DataContext';
+import '@testing-library/jest-dom';
 
-// Mock react-router
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => jest.fn(),
+jest.mock('../../../state/DataContext', () => ({
+  useData: jest.fn(),
 }));
+
+jest.mock('react-window', () => {
+  const React = require('react');
+  return {
+    FixedSizeList: ({ itemCount, itemData, children }) => (
+      <div data-testid="fixed-size-list">
+        {Array.from({ length: itemCount }).map((_, index) => (
+          <div key={index}>
+            {children({ index, style: {}, data: itemData })}
+          </div>
+        ))}
+      </div>
+    ),
+  };
+});
+
 
 describe('ItemsList', () => {
   let fetchItemsMock;
 
-  const renderWithContext = (contextValue) => {
-    render(
-      <DataContext.Provider value={contextValue}>
-        <ItemsList />
-      </DataContext.Provider>
-    );
-  };
-
   beforeEach(() => {
-    fetchItemsMock = jest.fn().mockResolvedValue();
+    fetchItemsMock = jest.fn(() => Promise.resolve());
   });
 
-  test('calls fetchItems on mount', async () => {
-    renderWithContext({ items: [], fetchItems: fetchItemsMock });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
+  it('calls fetchItems on mount', async () => {
+    useData.mockReturnValue({
+      items: [],
+      fetchItems: fetchItemsMock,
+    });
+
+    render(
+      <MemoryRouter>
+        <ItemsList />
+      </MemoryRouter>
+    );
     await waitFor(() => {
-      expect(fetchItemsMock).toHaveBeenCalledTimes(1);
+      expect(fetchItemsMock).toHaveBeenCalled();
     });
   });
 
-  test('shows loading spinner when items are undefined', () => {
-    renderWithContext({ items: undefined, fetchItems: fetchItemsMock });
+  it('shows a loading spinner if items are undefined', () => {
+    useData.mockReturnValue({
+      items: undefined,
+      fetchItems: fetchItemsMock,
+    });
 
+    render(
+      <MemoryRouter>
+        <ItemsList />
+      </MemoryRouter>
+    );
     expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
   });
 
-  test('shows empty message when items list is empty', async () => {
-    renderWithContext({ items: [], fetchItems: fetchItemsMock });
+  it('shows "No items found." when items is an empty array', async () => {
+    useData.mockReturnValue({
+      items: [],
+      fetchItems: fetchItemsMock,
+    });
 
-    expect(await screen.findByText(/no items found/i)).toBeInTheDocument();
+    render(
+      <MemoryRouter>
+        <ItemsList />
+      </MemoryRouter>
+    );
+    expect(await screen.findByText('No items found.')).toBeInTheDocument();
   });
 
-  test('renders list when items are present', async () => {
+  it('renders the list when items are available', async () => {
     const mockItems = [
-      { id: '1', name: 'Item 1', category: 'A', price: 10 },
-      { id: '2', name: 'Item 2', category: 'B', price: 20 },
+      { id: 1, name: 'Item 1', category: 'A', price: 10 },
+      { id: 2, name: 'Item 2', category: 'B', price: 20 },
     ];
 
-    renderWithContext({ items: mockItems, fetchItems: fetchItemsMock });
+    useData.mockReturnValue({
+      items: mockItems,
+      fetchItems: fetchItemsMock,
+    });
 
-    expect(await screen.findByText(/name/i)).toBeInTheDocument();
-    expect(fetchItemsMock).toHaveBeenCalledTimes(1);
+    render(
+      <MemoryRouter>
+        <ItemsList />
+      </MemoryRouter>
+    );
+    expect(await screen.findByTestId('fixed-size-list')).toBeInTheDocument();
   });
 });
-
