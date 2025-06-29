@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ItemsList from './items/ItemsList';
-import ItemsStats from './items/ItemsStats';
-import ItemsSearch from './items/ItemsSearch';
-import ItemsPagination from './items/ItemsPagination';
-import { DataProvider } from '../state/DataContext';
+import ItemsList from '../../components/items/ItemsList';
+import ItemsStats from '../../components/items/ItemsStats';
+import ItemsSearch from '../../components/items/ItemsSearch';
+import ItemsPagination from '../../components/items/ItemsPagination';
+import { DataProvider } from '../../state/DataContext';
 
 function Items() {
   const navigate = useNavigate();

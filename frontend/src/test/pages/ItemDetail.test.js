@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import ItemDetail from '../../pages/ItemDetail';
+import ItemDetail from '../../pages/items/ItemDetail';
 
 beforeEach(() => {
   fetch.resetMocks();

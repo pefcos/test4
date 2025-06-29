@@ -1,9 +1,10 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import Items from './Items';
-import ItemDetail from './ItemDetail';
-import Navbar from './Navbar';
-import NewItem from './NewItem';
+import Navbar from '../components/Navbar';
+// Items Routes
+import ItemDetail from './items/ItemDetail';
+import Items from './items/Items';
+import NewItem from './items/NewItem';
 
 function App() {
   return (

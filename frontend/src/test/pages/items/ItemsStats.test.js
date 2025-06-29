@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import ItemsStats from '../../../pages/items/ItemsStats';
+import ItemsStats from '../../../components/items/ItemsStats';
 import { useData } from '../../../state/DataContext';
 import '@testing-library/jest-dom';
 
@@ -8,7 +8,7 @@ jest.mock('../../../state/DataContext', () => ({
   useData: jest.fn(),
 }));
 
-jest.mock('../../../pages/LoadingSpinner', () => (props) => (
+jest.mock('../../../components/LoadingSpinner', () => (props) => (
   <div data-testid="loading-spinner" />
 ));
 

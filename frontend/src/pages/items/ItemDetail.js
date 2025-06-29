@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import LoadingSpinner from './LoadingSpinner';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 function ItemDetail() {
   const { id } = useParams();

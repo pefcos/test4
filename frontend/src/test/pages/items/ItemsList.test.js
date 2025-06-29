@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import ItemsList from '../../../pages/items/ItemsList';
+import ItemsList from '../../../components/items/ItemsList';
 import { useData } from '../../../state/DataContext';
 import { MemoryRouter } from 'react-router-dom';
 import * as DataContext from '../../../state/DataContext';

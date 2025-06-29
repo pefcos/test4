@@ -77,3 +77,7 @@ Some of the backend endpoints weren't being used by the frontend, so I decided t
 
 1. `GET /api/stats` - The `pages/items/ItemsStats` component fetches from the stats api to display the stats on item listing.
 2. `POST /api/items` - The `pages/NewItem` component adds a form for the user to register new items in the application.
+
+### Component directory structuring
+
+I've divided pages and components in two different directories. Pages are directly associated with routes in the frontend router, while components are parts that compose those pages. This makes the code more organized. Also, in a larger application, more pages would be contemplated in the router, so it makes sense to group pages in directories in relation to what kind of data they relate to. All the pages implemented relate to items, so I grouped them under the `pages/items` directory.

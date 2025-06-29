@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { postItemToAPI } from '../services/items';
+import { postItemToAPI } from '../../services/items';
 
 function NewItem() {
   const [name, setName] = useState('');

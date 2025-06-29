@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import ItemsPagination from '../../../pages/items/ItemsPagination';
+import ItemsPagination from '../../../components/items/ItemsPagination';
 import { useData } from '../../../state/DataContext';
 
 jest.mock('../../../state/DataContext', () => ({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import NewItem from '../../pages/NewItem';
+import NewItem from '../../pages/items/NewItem';
 import { postItemToAPI } from '../../services/items';
 import { useNavigate } from 'react-router-dom';
 
