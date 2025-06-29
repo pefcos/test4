@@ -23,7 +23,9 @@ I chose the file watcher approach, so this way, we only recalculate stats when t
 
 ### Task 3: Testing
 
-I've added Jest test to all routes, including happy paths and error cases, using mocking to mimic the behavior of other classes and utilities.
+I've added Jest test to all routes, including happy paths and error cases, using mocking to mimic the behavior of other classes and utilities. I've configured GitHub Actions CI to run the test suite on pushing to main.
+
+After the frontend interface was completed, I've implemented testing there as well, and added it to the CI. I've opted not to strictly test page contents because in the future, the layout may be subject to change and this may break the tests and make UI improvements and re-stylings more difficult. However, classes that have behavior such as displaying a spinner when loading or handling fetches and contents from the context provider, all have been tested.
 
 ## Frontend
 
