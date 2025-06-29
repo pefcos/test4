@@ -3,6 +3,8 @@
 Welcome, candidate! This project contains **intentional issues** that mimic real‑world scenarios.
 Your task is to refactor, optimize, and fix these problems.
 
+My solution is described in the [SOLUTION.md](https://github.com/pefcos/test4/blob/main/SOLUTION.md) file.
+
 ## Objectives
 
 ### 🔧 Backend (Node.js)
